@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import {Register, Login} from './component/form.js';
+import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom';
+import RootLayer from './layout/RootLayer.js';
+import { ListItem } from './component/ListItem.js'; 
+import { UpdateUser } from './component/UpdateUser.js';
 
-function App() {
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path='/' element={<RootLayer></RootLayer>}>
+      <Route index element={<Login></Login>}></Route>
+      <Route path='register' element={<Register></Register>}></Route>
+      <Route path='users' element={<ListItem></ListItem>}></Route>
+      <Route path='users/update/:id' element={<UpdateUser/>}></Route>
+    </Route>
+  )
+)
+
+export default function Form(){
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <RouterProvider router={router}></RouterProvider>
   );
-}
-
-export default App;
+};
